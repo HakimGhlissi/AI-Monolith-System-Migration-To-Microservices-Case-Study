@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Machine Learning Pipeline</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+      .navbar {
+        background-color: black;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        color: white;
+      }
+      .navbar a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+      }
+      .navbar a:hover {
+        text-decoration: underline;
+      }
+      .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      .section {
+        margin-bottom: 30px;
+      }
+      .readme-style p {
+        text-align: justify;
+      }
+      .commands code {
+        display: block;
+        padding: 10px;
+        background-color: #f4f4f4;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+      .buttons,
+      .pipeline,
+      .full-pipeline {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      .buttons button,
+      .pipeline button,
+      .full-pipeline button {
+        padding: 15px 20px;
+        margin: 10px;
+        flex: 1 1 calc(50% - 20px);
+        cursor: pointer;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      .buttons button:hover,
+      .pipeline button:hover,
+      .full-pipeline button:hover {
+        background-color: #0056b3;
+      }
+      .result {
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fafafa;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+      img {
+        width: 100%;
+        border-radius: 5px;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      ul li {
+        margin-bottom: 10px;
+      }
+      .pipeline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      .pipeline button {
+        padding: 15px 20px;
+        margin: 10px;
+        flex: 1 1 calc(25% - 20px);
+        cursor: pointer;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        position: relative;
+      }
+      .pipeline button:hover {
+        background-color: #0056b3;
+      }
+      .pipeline button::after {
+        content: "→";
+        position: absolute;
+        right: -30px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 24px;
+        color: #333;
+      }
+      .pipeline button:last-child::after {
+        content: "";
+      }
+      .full-pipeline {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .full-pipeline button {
+        padding: 15px 20px;
+        cursor: pointer;
+        background-color: darkgreen;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      .full-pipeline button:hover {
+        background-color: green;
+      }
+      .card {
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        padding: 15px;
+        margin-bottom: 10px;
+      }
+      .card h3 {
+        margin: 0 0 10px;
+      }
+      .label {
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="#application-details">Application Details</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#application" style="color: #ffa500">Application</a>
+    </div>
+    <div class="container">
+      <div id="application-details" class="section readme-style">
+        <h1>Application Details</h1>
+        <p>
+          This project is part of the research paper
+          <strong
+            >"The Migration of Monolithic Systems to AI-Based Microservices
+            Using AI Design Patterns"</strong
+          >. The aim is to demonstrate how to migrate AI-based systems using
+          design patterns. Due to the lack of available monolithic AI
+          applications that also have a microservice-based version, we validated
+          our approach by creating our own application.
+        </p>
+        <p>
+          Our application is an image classification system that uses the
+          CIFAR-10 dataset to classify different images. We implemented the
+          entire ML pipeline within a web application using Flask and Python for
+          the backend.
+        </p>
+        <p>
+          To run the application, install the dependencies listed in the
+          <strong>requirements.txt</strong> file and execute the following
+          command:
+        </p>
+        <div class="commands">
+          <code>
+            $ pip install -r requirements.txt<br />
+            $ python flask_app.py
+          </code>
+        </div>
+      </div>
+
+      <div id="architecture" class="section">
+        <h1>Architecture</h1>
+        <img src="static/MLPipelinemono.png" alt="Application Architecture" />
+      </div>
+
+      <div id="application" class="section">
+        <h1>Machine Learning Pipeline</h1>
+        <p>
+          You have two options for running the machine learning pipeline:
+        </p>
+        <ul>
+          <li>
+            <strong>Run Each Step Separately:</strong> Execute the following steps individually:
+            <ul>
+              <li><strong>Load and Preprocess Data:</strong> Prepare the data for training.</li>
+              <li><strong>Train Model:</strong> Train the machine learning model using the preprocessed data.</li>
+              <li><strong>Evaluate Model:</strong> Assess the performance of the trained model.</li>
+              <li><strong>Predict:</strong> Use the trained model to make predictions on new data.</li>
+            </ul>
+          </li>
+        </ul>
+        <p>
+          Each part of the machine learning pipeline is running on a separate server with an API gateway orchestrating the calls between the different microservices.
+        </p>
+        <div class="pipeline">
+          <button onclick="loadAndPreprocess()">
+            Load and Preprocess Data
+          </button>
+          <button onclick="trainModel()">Train Model</button>
+          <button onclick="evaluateModel()">Evaluate Model</button>
+          <button onclick="predict()">Predict</button>
+        </div>
+        <div id="result" class="result"></div>
+      </div>
+    </div>
+
+    <script>
+      function getCurrentTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        return `${hours}:${minutes}`;
+      }
+
+      async function loadAndPreprocess() {
+        try {
+          const response = await fetch("/load_and_preprocess", {
+            method: "POST",
+          });
+          const result = await response.json();
+          displayResult(result, "Load and Preprocess Data");
+        } catch (error) {
+          console.error("Error during loading and preprocessing:", error);
+          document.getElementById("result").innerText = `Error: ${error.message}`;
+        }
+      }
+
+      async function trainModel() {
+        try {
+          const response = await fetch("http://localhost:5002/train", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ sample_size: 0.2 }), // Example for 20% sample size
+          });
+
+          if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+          }
+
+          const result = await response.json();
+          displayResult(result, "Train Model");
+        } catch (error) {
+          console.error("Error during training:", error);
+          document.getElementById("result").innerText = `Error: ${error.message}`;
+        }
+      }
+
+      async function evaluateModel() {
+        try {
+          const response = await fetch("http://localhost:5003/evaluate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+          });
+
+          if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+          }
+
+          const result = await response.json();
+          displayResult(result, "Evaluate Model");
+        } catch (error) {
+          console.error("Error during evaluation:", error);
+          document.getElementById("result").innerText = `Error: ${error.message}`;
+        }
+      }
+
+      async function predict() {
+        try {
+          const imageUrl = prompt("Please enter the image URL:");
+
+          if (imageUrl) {
+            const response = await fetch("http://localhost:5004/predict", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ image_url: imageUrl }),
+            });
+
+            if (!response.ok) {
+              throw new Error(`Error: ${response.statusText}`);
+            }
+
+            const result = await response.json();
+            displayResult(result, "Predict");
+          } else {
+            alert("Image URL cannot be empty.");
+          }
+        } catch (error) {
+          console.error("Error during prediction:", error);
+          document.getElementById("result").innerText = `Error: ${error.message}`;
+        }
+      }
+
+      function displayResult(result, action) {
+        const currentTime = getCurrentTime();
+        const resultElement = document.getElementById("result");
+
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const title = document.createElement("h3");
+        title.textContent = `${action} - ${currentTime}`;
+        card.appendChild(title);
+
+        for (const key in result) {
+          const paragraph = document.createElement("p");
+          paragraph.innerHTML = `<span class="label">${key}:</span> ${result[key]}`;
+          card.appendChild(paragraph);
+        }
+
+        resultElement.insertBefore(card, resultElement.firstChild);
+      }
+    </script>
+  </body>
+</html>

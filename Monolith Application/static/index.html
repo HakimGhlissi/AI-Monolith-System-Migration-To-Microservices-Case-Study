@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Image Classification Monolith Web Application</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+      .navbar {
+        background-color: black;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: right;
+        align-items: center;
+        color: white;
+      }
+      .navbar a {
+        color: white;
+        text-decoration: none;
+        margin: 0 15px;
+      }
+      .navbar a:hover {
+        text-decoration: underline;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      h1 {
+        text-align: center;
+        color: #333;
+      }
+      .pipeline {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 20px;
+      }
+      .pipeline button {
+        padding: 15px 20px;
+        margin: 10px;
+        flex: 1 1 calc(25% - 20px);
+        cursor: pointer;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        position: relative;
+      }
+      .pipeline button:hover {
+        background-color: #0056b3;
+      }
+      .pipeline button::after {
+        content: "→";
+        position: absolute;
+        right: -30px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 24px;
+        color: #333;
+      }
+      .pipeline button:last-child::after {
+        content: "";
+      }
+      .result {
+        margin-top: 20px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fafafa;
+        max-height: 300px;
+        overflow-y: auto;
+      }
+      .section {
+        margin-bottom: 50px;
+      }
+      .commands {
+        background-color: #272822;
+        color: #f8f8f2;
+        padding: 15px;
+        border-radius: 5px;
+        font-family: "Courier New", Courier, monospace;
+        margin-top: 20px;
+        overflow-x: auto;
+      }
+      .commands span {
+        color: #66d9ef;
+      }
+      .card {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        margin: 10px 0;
+        padding: 20px;
+        transition: box-shadow 0.3s;
+      }
+      .card:hover {
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      }
+      .card h3 {
+        margin-top: 0;
+        color: #007bff;
+      }
+      .card p {
+        margin: 5px 0;
+      }
+      .card .label {
+        font-weight: bold;
+        color: #555;
+      }
+      .full-pipeline {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .full-pipeline button {
+        padding: 15px 20px;
+        cursor: pointer;
+        background-color: darkgreen;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+      .full-pipeline button:hover {
+        background-color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar">
+      <a href="#application-details">Application Details</a>
+      <a href="#architecture">Architecture</a>
+      <a href="#application" style="color: #ffa500">Application</a>
+    </div>
+
+    <div class="container">
+      <div id="application-details" class="section readme-style">
+        <h1>Application Details</h1>
+        <p>
+          This project is part of the research paper
+          <strong
+            >"The Migration of Monolithic Systems to AI-Based Microservices
+            Using AI Design Patterns"</strong
+          >. The aim is to demonstrate how to migrate AI-based systems using
+          design patterns. Due to the lack of available monolithic AI
+          applications that also have a microservice-based version, we validated
+          our approach by creating our own application.
+        </p>
+        <p>
+          Our application is an image classification system that uses the
+          CIFAR-10 dataset to classify different images. We implemented the
+          entire ML pipeline within a web application using Flask and Python for
+          the backend.
+        </p>
+        <p>
+          To run the application, install the dependencies listed in the
+          <strong>requirements.txt</strong> file and execute the following
+          command:
+        </p>
+        <div class="commands">
+          <code>
+            $ pip install -r requirements.txt<br />
+            $ python flask_app.py
+          </code>
+        </div>
+      </div>
+
+      <div id="architecture" class="section">
+        <h1>Architecture</h1>
+        <img
+          src="static/MLPipelinemono.png"
+          alt="Application Architecture"
+          style="width: 100%; border-radius: 5px"
+        />
+      </div>
+
+      <div id="application" class="section">
+        <h1>Machine Learning Pipeline</h1>
+        <p>
+            You have two options for running the machine learning pipeline:
+        </p>
+        <ul>
+            <li>
+                <strong>Run Each Step Separately:</strong> Execute the following steps individually:
+                <ul>
+                    <li><strong>Load and Preprocess Data:</strong> Prepare the data for training.</li>
+                    <li><strong>Train Model:</strong> Train the machine learning model using the preprocessed data.</li>
+                    <li><strong>Evaluate Model:</strong> Assess the performance of the trained model.</li>
+                    <li><strong>Predict:</strong> Use the trained model to make predictions on new data.</li>
+                </ul>
+            </li>
+            <li>
+                <strong>Run Full Pipeline:</strong> Execute all steps in one go with the "Run Full Pipeline" button.
+            </li>
+        </ul>
+        <p>
+            All steps of the machine learning pipeline are performed on the same server.
+        </p>
+        <div class="pipeline">
+          <button onclick="loadAndPreprocess()">
+            Load and Preprocess Data
+          </button>
+          <button onclick="trainModel()">Train Model</button>
+          <button onclick="evaluateModel()">Evaluate Model</button>
+          <button onclick="predict()">Predict</button>
+        </div>
+        <div class="full-pipeline">
+          <button onclick="runFullPipeline()">Run Full Pipeline</button>
+        </div>
+        <div id="result" class="result"></div>
+      </div>
+    </div>
+
+    <script>
+      function getCurrentTime() {
+        const now = new Date();
+        const hours = String(now.getHours()).padStart(2, "0");
+        const minutes = String(now.getMinutes()).padStart(2, "0");
+        return `${hours}:${minutes}`;
+      }
+
+      async function loadAndPreprocess() {
+        const response = await fetch("/load_and_preprocess", {
+          method: "POST",
+        });
+        const result = await response.json();
+        displayResult(result, "Load and Preprocess Data");
+      }
+
+      async function trainModel() {
+        const response = await fetch("/train", { method: "POST" });
+        const result = await response.json();
+        displayResult(result, "Train Model");
+      }
+
+      async function evaluateModel() {
+        const modelPath = prompt("Enter the model path:", "CNN-91.74.h5");
+        const response = await fetch("/evaluate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ model_path: modelPath }),
+        });
+        const result = await response.json();
+        displayResult(result, "Evaluate Model");
+      }
+
+      async function predict() {
+        const modelPath = prompt("Enter the model path:", "CNN-91.74.h5");
+        // const imageUrl = prompt("Enter the image URL:, https://cdn.britannica.com/96/1296-050-4A65097D/gelding-bay-coat.jpg");
+        const imageUrl = "https://cdn.britannica.com/96/1296-050-4A65097D/gelding-bay-coat.jpg"
+        const response = await fetch("/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ model_path: modelPath, image_url: imageUrl }),
+        });
+        const result = await response.json();
+        displayResult(result, "Predict");
+      }
+
+      async function runFullPipeline() {
+        // document.getElementById("result").innerHTML = "https://cdn.britannica.com/96/1296-050-4A65097D/gelding-bay-coat.jpg"; // Done with static results 
+
+        // Step 1: Load and Preprocess Data
+        let response = await fetch("/load_and_preprocess", { method: "POST" });
+        let result = await response.json();
+        displayResult(result, "Load and Preprocess Data");
+
+        // Step 2: Train Model
+        response = await fetch("/train", { method: "POST" });
+        result = await response.json();
+        displayResult(result, "Train Model");
+
+        // Step 3: Evaluate Model
+        const modelPath = "CNN-91.74.h5";  // Use a default model path or prompt if needed
+        response = await fetch("/evaluate", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ model_path: modelPath }),
+        });
+        result = await response.json();
+        displayResult(result, "Evaluate Model");
+
+        // Step 4: Predict
+        const imageUrl = prompt("Enter the image URL:"); // Prompt for image URL
+        response = await fetch("/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ model_path: modelPath, image_url: imageUrl }),
+        });
+        result = await response.json();
+        displayResult(result, "Predict");
+      }
+
+      function displayResult(result, title) {
+        const resultDiv = document.getElementById("result");
+        const card = document.createElement("div");
+        card.className = "card";
+        const cardTitle = document.createElement("h3");
+        cardTitle.innerText = `${title} - ${getCurrentTime()}`;
+        card.appendChild(cardTitle);
+        for (const [key, value] of Object.entries(result)) {
+          const p = document.createElement("p");
+          p.innerHTML = `<span class="label">${key}:</span> ${value}`;
+          card.appendChild(p);
+        }
+        resultDiv.appendChild(card);
+      }
+    </script>
+  </body>
+</html>
