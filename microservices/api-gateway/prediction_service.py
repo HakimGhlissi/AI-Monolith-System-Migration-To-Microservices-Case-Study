@@ -9,7 +9,7 @@ from flask_cors import CORS
 
 # Initialize Flask application
 app = Flask(__name__)
-CORS(app)  # Enable CORS
+CORS(app)
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -39,7 +39,7 @@ def predict():
         image = Image.open(BytesIO(response.content))
         image = image.convert('RGB')
         
-        # Resize image to match the model input size (e.g., 32x32 for CIFAR-10)
+        # Resize image to match the model input size
         image = image.resize((32, 32))
         image_data = np.array(image)
         

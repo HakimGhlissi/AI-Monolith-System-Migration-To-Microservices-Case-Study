@@ -8,7 +8,7 @@ from flask_cors import CORS
 logging.basicConfig(level=logging.INFO)
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS
+CORS(app)
 
 preprocessed_data = None
 
@@ -17,6 +17,7 @@ def load_and_preprocess():
     global preprocessed_data
     try:
         # Hardcode sample_fraction to 0.2 to use 20% of the data
+        # We used 20% to have a faster runtime when checking/validating the ml pipeline but it can adjsuted to 1.0 to use the entire dataset
         sample_fraction = 0.2
 
         logging.info("Starting data loading process.")

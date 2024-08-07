@@ -263,7 +263,7 @@
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({ sample_size: 0.2 }), // Example for 20% sample size
+            body: JSON.stringify({ sample_size: 0.2 }), // Can be adjusted to 1.0 to use the entire dataset, we used 20% of the data to validate the functionalities of the application and to have a faster runtime 
           });
 
           if (!response.ok) {

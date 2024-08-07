@@ -83,7 +83,7 @@ def train_model():
 @app.route('/get_model_path', methods=['GET'])
 def get_model_path():
     try:
-        model_path = "CNN-91.74.h5"  # Adjust the path as necessary
+        model_path = "CNN-91.74.h5"
         return jsonify({"model_path": model_path})
     except Exception as e:
         return jsonify({"error": str(e)}), 500

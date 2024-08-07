@@ -145,7 +145,7 @@ class CNNModel:
         self.model.compile(optimizer=opt, loss='categorical_crossentropy', metrics=['accuracy'])
 
     def train(self, datagen, x_train, y_train, x_val, y_val, epochs=20):
-        steps_per_epoch = len(x_train) // 64  # Use integer division
+        steps_per_epoch = len(x_train) // 64
         callbacks = [
             tf.keras.callbacks.ReduceLROnPlateau(monitor='val_loss', patience=10, cooldown=1, verbose=1),
             tf.keras.callbacks.EarlyStopping(monitor='val_loss', min_delta=1e-4, patience=15)

@@ -4,7 +4,7 @@ from tensorflow.keras.utils import to_categorical
 import numpy as np
 import requests
 import logging
-from flask_cors import CORS  # Import CORS
+from flask_cors import CORS
 
 # Initialize Flask application
 app = Flask(__name__)
