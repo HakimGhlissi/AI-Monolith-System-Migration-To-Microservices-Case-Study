@@ -1,0 +1,6 @@
+Flask
+Flask-Cors
+tensorflow
+pika
+numpy
+requests
